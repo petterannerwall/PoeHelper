@@ -1,33 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MiscUtil.IO;
 
-namespace PoEHelper
+namespace FormHelper
 {
-    class Program
+    public class InputSender
     {
-        private static bool debug = true;
 
-        static void Main(string[] args)
+        public void Command(List<string> lastKeys, string key)
         {
-
-            InterceptKeys.KeyPressedEvent += KeyPressedEvent;
-            new InterceptKeys();
-        }
-
-        private static void KeyPressedEvent(object sender, KeyEventArgs args)
-        {
-            string key = args.Key;
-
-            if (debug)
-                Console.WriteLine("[DEBUG] Key pressed: " + key);
-            
             switch (key)
             {
                 case "F1":
@@ -43,33 +27,30 @@ namespace PoEHelper
                     SendWhisperReply("In map at the moment. Il get back when i go to town.");
                     break;
             }
-
         }
 
-        private static void SendCommand(string text)
+        private void SendCommand(string text)
         {
-            Console.WriteLine("Sent command: " + text);
+            Console.WriteLine(@"Sent command: " + text);
             SendKeys.Send("{ENTER}");
             TypeString(text);
             SendKeys.Send("{ENTER}");
         }
 
-        private static void SendWhisperReply(string reply)
+        private void SendWhisperReply(string reply)
         {
-            Console.WriteLine("Sent whisper reply: " + reply);
+            Console.WriteLine(@"Sent whisper reply: " + reply);
             SendKeys.Send("^{ENTER}");
             TypeString(reply);
             SendKeys.Send("{ENTER}");
         }
 
-        private static void TypeString(string text)
+        private void TypeString(string text)
         {
             foreach (char ch in text)
             {
                 SendKeys.Send(ch.ToString());
             }
         }
-        
-        
     }
 }
