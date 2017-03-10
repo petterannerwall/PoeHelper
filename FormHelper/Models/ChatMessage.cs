@@ -26,6 +26,7 @@ namespace FormHelper.Models
         public DateTime Time { get; set; }
         public MessageType Type { get; set; }
         public string Message { get; set; }
+        public PoETradeMessage TradeMessage { get; set; }
 
         public ChatMessage(string message)
         {
@@ -41,6 +42,8 @@ namespace FormHelper.Models
 
             Time = DateTime.ParseExact(matches[0].Groups[1].Value, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture);
             Player = matches[0].Groups[3].Value;
+            Player = Player.Split(' ').Last();
+
             Message = matches[0].Groups[4].Value;
 
             var type = matches[0].Groups[2].Value;
@@ -67,7 +70,9 @@ namespace FormHelper.Models
             if (Type == MessageType.Private && Message.Contains("I would like to buy"))
             {
                 Type = MessageType.PoETrade;
+                TradeMessage = new PoETradeMessage(Message);
             }
         }
+
     }
 }

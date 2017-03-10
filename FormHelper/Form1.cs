@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FormHelper.Models;
 
 namespace FormHelper
 {
@@ -38,7 +39,12 @@ namespace FormHelper
         private void ChatMessageDetected(object sender, ChatMessageEventArgs args)
         {
             string text = string.Format("{0} Type: {1} Player: {2} Message: {3}", args.Message.Time, args.Message.Type, args.Message.Player, args.Message.Message);
-            //chatListBox.Items.Insert(0,text);
+
+            if (args.Message.Type == ChatMessage.MessageType.PoETrade)
+            {
+                _tradeForm = new TradeForm(args.Message);
+                ShowInactiveTopmost(_tradeForm);
+            }
 
             Invoke(new MethodInvoker(
                   delegate { chatListBox.Items.Add(text); }
@@ -60,13 +66,14 @@ namespace FormHelper
         private void startButton_Click(object sender, EventArgs e)
         {
             startButton.Text = startButton.Text == "Start" ? "Stop" : "Start";
-
             _chatReader.ToggleTimer();
         }
 
         private void debugButton_Click(object sender, EventArgs e)
         {
-            _tradeForm = new TradeForm();
+            var message = new ChatMessage("2017/03/10 15:18:54 365324296 951 [INFO Client 9156] @From <†OG†> Patrinislegacy: Hi, I would like to buy your Poorjoy\'s Asylum Temple Map listed for 10 chaos in Legacy (stash tab \"<3\"; position: left 10, top 8)");
+
+            _tradeForm = new TradeForm(message);
             ShowInactiveTopmost(_tradeForm);
         }
 
