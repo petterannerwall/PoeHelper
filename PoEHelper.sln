@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoEHelper", "PoEHelper.csproj", "{D8E9F319-E7AB-4129-B4FE-A1CF14165718}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoEHelper", "PoEHelper\PoEHelper.csproj", "{D8E9F319-E7AB-4129-B4FE-A1CF14165718}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormHelper", "..\FormHelper\FormHelper.csproj", "{D4BD2A5F-8841-49FD-8C06-39ED1065E198}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormHelper", "FormHelper\FormHelper.csproj", "{D4BD2A5F-8841-49FD-8C06-39ED1065E198}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
