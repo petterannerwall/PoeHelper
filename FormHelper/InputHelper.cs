@@ -30,22 +30,28 @@ namespace FormHelper
         public void SendWhisperTo(string player, string message)
         {
             BlockInput(true);
-            WindowHelper.SetFocusToPathOfExileWindow();
-            string text = string.Format("@{0} {1}", player, message);
-            SendKeys.Send("{ENTER}");
-            TypeString(text);
-            SendKeys.Send("{ENTER}");
-            BlockInput(false);
+            var success = WindowHelper.SetFocusToPathOfExileWindow();
+            if (success)
+            {
+                string text = string.Format("@{0} {1}", player, message);
+                SendKeys.Send("{ENTER}");
+                TypeString(text);
+                SendKeys.Send("{ENTER}");
+                BlockInput(false);
+            }
         }
 
         public void InvitePlayerToParty(string player)
         {
             BlockInput(true);
-            WindowHelper.SetFocusToPathOfExileWindow();
-            SendKeys.Send("{ENTER}");
-            TypeString("/invite " + player);
-            SendKeys.Send("{ENTER}");
-            BlockInput(false);
+            var success = WindowHelper.SetFocusToPathOfExileWindow();
+            if (success)
+            {
+                SendKeys.Send("{ENTER}");
+                TypeString("/invite " + player);
+                SendKeys.Send("{ENTER}");
+                BlockInput(false);
+            }
         }
 
         private void SendCommand(string text)

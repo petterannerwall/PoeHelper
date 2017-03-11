@@ -36,8 +36,6 @@
             this.startButton = new System.Windows.Forms.Button();
             this.debugButton = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.characterNameTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // pathTextBox
@@ -50,7 +48,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(10, 152);
+            this.saveButton.Location = new System.Drawing.Point(10, 105);
             this.saveButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(391, 28);
@@ -98,31 +96,11 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 101);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 17);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Character Name";
-            // 
-            // characterNameTextBox
-            // 
-            this.characterNameTextBox.Location = new System.Drawing.Point(10, 122);
-            this.characterNameTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.characterNameTextBox.Name = "characterNameTextBox";
-            this.characterNameTextBox.Size = new System.Drawing.Size(388, 22);
-            this.characterNameTextBox.TabIndex = 7;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 188);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.characterNameTextBox);
+            this.ClientSize = new System.Drawing.Size(411, 142);
             this.Controls.Add(this.debugButton);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.pathToLogFileLabel);
@@ -145,8 +123,6 @@
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button debugButton;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox characterNameTextBox;
     }
 }
 
