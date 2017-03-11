@@ -23,6 +23,7 @@ namespace FormHelper.Models
         }
 
         public string Player { get; set; }
+        public bool Recived { get; set; }
         public DateTime Time { get; set; }
         public MessageType Type { get; set; }
         public string Message { get; set; }
@@ -30,6 +31,7 @@ namespace FormHelper.Models
 
         public ChatMessage(string message)
         {
+            
             const string pattern = @"(\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}:\d{2})[^\]]+\]\s([$@%#])([^:]+):\s(.*)";
 
             var matches = Regex.Matches(message, pattern, RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline | RegexOptions.IgnoreCase);
@@ -65,6 +67,11 @@ namespace FormHelper.Models
                 default:
                     Type = MessageType.Other;
                     break;
+            }
+
+            if (Type == MessageType.Private)
+            {
+                Recived = message.Contains("From") ? true : false;
             }
 
             if (Type == MessageType.Private && Message.Contains("I would like to buy"))

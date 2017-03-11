@@ -15,6 +15,7 @@ namespace FormHelper
     public class HelperSettings : AppSettings<HelperSettings>
     {
         public string LogPath = "";
+        public string CharacterName = "";
     }
 
     public class AppSettings<T> where T : new()

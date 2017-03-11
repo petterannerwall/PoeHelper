@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,33 +24,73 @@ namespace FormHelper
                 case "F2":
                     SendCommand("/hideout");
                     break;
-                case "F4":
-                    SendWhisperReply("In map at the moment. Il get back when i go to town.");
-                    break;
             }
+        }
+
+        public void SendWhisperTo(string player, string message)
+        {
+            BlockInput(true);
+            WindowHelper.SetFocusToPathOfExileWindow();
+            string text = string.Format("@{0} {1}", player, message);
+            SendKeys.Send("{ENTER}");
+            TypeString(text);
+            SendKeys.Send("{ENTER}");
+            BlockInput(false);
+        }
+
+        public void InvitePlayerToParty(string player)
+        {
+            BlockInput(true);
+            WindowHelper.SetFocusToPathOfExileWindow();
+            SendKeys.Send("{ENTER}");
+            TypeString("/invite " + player);
+            SendKeys.Send("{ENTER}");
+            BlockInput(false);
         }
 
         private void SendCommand(string text)
         {
-            Console.WriteLine(@"Sent command: " + text);
+            BlockInput(true);
             SendKeys.Send("{ENTER}");
             TypeString(text);
             SendKeys.Send("{ENTER}");
+            BlockInput(false);
         }
 
         private void SendWhisperReply(string reply)
         {
-            Console.WriteLine(@"Sent whisper reply: " + reply);
+            BlockInput(true);
             SendKeys.Send("^{ENTER}");
             TypeString(reply);
             SendKeys.Send("{ENTER}");
+            BlockInput(false);
         }
+
+
 
         private void TypeString(string text)
         {
             foreach (char ch in text)
             {
                 SendKeys.Send(ch.ToString());
+            }
+        }
+
+        
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll", EntryPoint = "BlockInput")]
+        [return: System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.Bool)]
+        public static extern bool BlockInput([System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.Bool)] bool fBlockIt);
+        
+        public static void BlockInput(TimeSpan span)
+        {
+            try
+            {
+                BlockInput(true);
+                Thread.Sleep(span);
+            }
+            finally
+            {
+                BlockInput(false);
             }
         }
     }

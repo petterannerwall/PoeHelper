@@ -40,7 +40,7 @@ namespace PoEHelper
         {
             _lastKeys = new List<string>();   
             _hookID = SetHook(_proc);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
             UnhookWindowsHookEx(_hookID);
         }
 

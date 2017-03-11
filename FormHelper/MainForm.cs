@@ -13,49 +13,63 @@ using FormHelper.Models;
 
 namespace FormHelper
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        private readonly HelperSettings _helperSettings;
+        private HelperSettings _helperSettings;
         private readonly ChatReader _chatReader;
         private readonly InputSender _inputSender;
         private Form _tradeForm;
         private static int _tradeFormCount = 0;
 
-        public Form1()
+        public MainForm()
         {
             InterceptKeys.KeyPressedEvent += KeyPressedEvent;
             ChatReader.ChatMessageDetected += ChatMessageDetected;
+            this.Resize += Form1_Resize;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
 
             InitializeComponent();
             
-            _helperSettings = HelperSettings.Load();
             _chatReader = new ChatReader();
             _inputSender = new InputSender();
 
+            loadApplicationSettings();
+        }
+
+        private void loadApplicationSettings()
+        {
+            _helperSettings = HelperSettings.Load();
             pathTextBox.Text = _helperSettings.LogPath;
+            characterNameTextBox.Text = _helperSettings.CharacterName;
             _chatReader.SetLogPath(_helperSettings.LogPath);
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+            }
         }
 
         private void ChatMessageDetected(object sender, ChatMessageEventArgs args)
         {
             string text = string.Format("{0} Type: {1} Player: {2} Message: {3}", args.Message.Time, args.Message.Type, args.Message.Player, args.Message.Message);
 
-            if (args.Message.Type == ChatMessage.MessageType.PoETrade)
+            if (args.Message.Type == ChatMessage.MessageType.PoETrade && args.Message.Recived)
             {
                 _tradeForm = new TradeForm(args.Message);
-                ShowInactiveTopmost(_tradeForm);
-            }
-
-            Invoke(new MethodInvoker(
-                  delegate { chatListBox.Items.Add(text); }
-                  ));
+                Invoke(new MethodInvoker( delegate { ShowInactiveTopmost(_tradeForm); }));
+            }            
         }
 
         private void savePathButton_Click(object sender, EventArgs e)
         {
-            var path = pathTextBox.Text;
-            _helperSettings.LogPath = path;
+            _helperSettings.LogPath = pathTextBox.Text;
+            _helperSettings.CharacterName = characterNameTextBox.Text;
             _helperSettings.Save();
+            loadApplicationSettings();
         }
 
         private void KeyPressedEvent(object sender, PoEHelper.KeyEventArgs args)
@@ -71,10 +85,12 @@ namespace FormHelper
 
         private void debugButton_Click(object sender, EventArgs e)
         {
-            var message = new ChatMessage("2017/03/10 15:18:54 365324296 951 [INFO Client 9156] @From <†OG†> Patrinislegacy: Hi, I would like to buy your Poorjoy\'s Asylum Temple Map listed for 10 chaos in Legacy (stash tab \"<3\"; position: left 10, top 8)");
+            var message = new ChatMessage("2017/03/10 15:18:54 365324296 951 [INFO Client 9156] @From Big_P: Hi, I would like to buy your Poorjoy\'s Asylum Temple Map listed for 10 chaos in Legacy (stash tab \"<3\"; position: left 10, top 8)");
 
             _tradeForm = new TradeForm(message);
             ShowInactiveTopmost(_tradeForm);
+
+
         }
 
 
@@ -109,7 +125,7 @@ namespace FormHelper
             }
 
             var left = (rightmost.WorkingArea.Right - frm.Width) + (_tradeFormCount * -10);
-            var top = (rightmost.WorkingArea.Bottom - frm.Height) + (_tradeFormCount * -10);
+            var top = (rightmost.WorkingArea.Bottom - frm.Height) + (_tradeFormCount * -10) + 45;
 
             ShowWindow(frm.Handle, SW_SHOWNOACTIVATE);
             SetWindowPos(frm.Handle.ToInt32(), HWND_TOPMOST,
@@ -120,6 +136,12 @@ namespace FormHelper
         private static void Frm_Closed(object sender, EventArgs e)
         {
             _tradeFormCount--;
+        }
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
         }
     }
 }

@@ -14,16 +14,18 @@ namespace FormHelper
     public partial class TradeForm : Form
     {
         private ChatMessage _chatMessage;
+        private InputSender _inputSender;
 
         public TradeForm(ChatMessage message)
         {
+            this.ShowInTaskbar = false;
             _chatMessage = message;
+            _inputSender = new InputSender();
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-            descriptionLabel.Text = string.Format("{0} for {1} in {2}",message.TradeMessage.Item, message.TradeMessage.Price, message.TradeMessage.League);
-            
+            descriptionLabel.Text = string.Format("{0} wants to buy {1} for {2}", message.Player, message.TradeMessage.Item, message.TradeMessage.Price);
         }
-        
+
 
         private void closeButton_Click(object sender, EventArgs e)
         {
@@ -32,17 +34,20 @@ namespace FormHelper
 
         private void soldButton_Click(object sender, EventArgs e)
         {
-
+            _inputSender.SendWhisperTo(_chatMessage.Player, "Sorry " + _chatMessage.TradeMessage.Item + " is already sold");
+            this.Close();
         }
 
         private void inMapButton_Click(object sender, EventArgs e)
         {
-
+            _inputSender.SendWhisperTo(_chatMessage.Player, "In map at the moment, il get back when i go to town");
+            this.Close();
         }
 
         private void inviteButton_Click(object sender, EventArgs e)
         {
-
+            _inputSender.InvitePlayerToParty(_chatMessage.Player);
+            this.Close();
         }
     }
 }
