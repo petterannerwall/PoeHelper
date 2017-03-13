@@ -37,7 +37,7 @@ namespace ExileHelper
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             this.Left = desktopWorkingArea.Right - this.Width;
             this.Top = desktopWorkingArea.Bottom - this.Height;
-            
+            this.Topmost = true;
 
 
         }
