@@ -5,9 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace FormHelper
+namespace Core
 {
     public static class WindowHelper
     {
@@ -46,22 +45,22 @@ namespace FormHelper
             Minimize = 6, ShowMinNoActivate = 7, ShowNoActivate = 8,
             Restore = 9, ShowDefault = 10, ForceMinimized = 11
         };
-            
-        public static void ShowInactiveTopmost(Form form)
-        {
-            _tradeFormCount++;
-            form.Closed += form_Closed;
 
-            Screen primaryScreen = Screen.PrimaryScreen;
+        //public static void ShowInactiveTopmost(Form form)
+        //{
+        //    _tradeFormCount++;
+        //    form.Closed += form_Closed;
 
-            var left = (primaryScreen.WorkingArea.Right - form.Width) + (_tradeFormCount * -10);
-            var top = (primaryScreen.WorkingArea.Bottom - form.Height) + (_tradeFormCount * -10) + 45;
+        //    Screen primaryScreen = Screen.PrimaryScreen;
 
-            ShowWindow(form.Handle, SW_SHOWNOACTIVATE);
-            SetWindowPos(form.Handle.ToInt32(), HWND_TOPMOST,
-            left, top, form.Width, form.Height,
-            SWP_NOACTIVATE);
-        }
+        //    var left = (primaryScreen.WorkingArea.Right - form.Width) + (_tradeFormCount * -10);
+        //    var top = (primaryScreen.WorkingArea.Bottom - form.Height) + (_tradeFormCount * -10) + 45;
+
+        //    ShowWindow(form.Handle, SW_SHOWNOACTIVATE);
+        //    SetWindowPos(form.Handle.ToInt32(), HWND_TOPMOST,
+        //    left, top, form.Width, form.Height,
+        //    SWP_NOACTIVATE);
+        //}
 
         private static void form_Closed(object sender, EventArgs e)
         {
@@ -91,7 +90,7 @@ namespace FormHelper
                 }
                 SetForegroundWindow(process.MainWindowHandle);
                 return true;
-                
+
             }
 
             return false;

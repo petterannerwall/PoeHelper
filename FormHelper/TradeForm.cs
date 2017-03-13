@@ -23,7 +23,7 @@ namespace FormHelper
             _inputSender = new InputSender();
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-            descriptionLabel.Text = string.Format("{0} wants to buy {1} for {2}", message.Player, message.TradeMessage.Item, message.TradeMessage.Price);
+            descriptionLabel.Text = string.Format("{0} wants to buy {1} for {2} in {3}", message.Player, message.TradeMessage.Item, message.TradeMessage.Price, message.TradeMessage.Location);
         }
 
 
@@ -47,7 +47,33 @@ namespace FormHelper
         private void inviteButton_Click(object sender, EventArgs e)
         {
             _inputSender.InvitePlayerToParty(_chatMessage.Player);
-            this.Close();
+            closeButton.Width = 200;
+            thankButton.Show();
+            inviteButton.Hide();
+            inMapButton.Hide();
+            soldButton.Hide();
+        }
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void Form1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void thankButton_Click(object sender, EventArgs e)
+        {
+            _inputSender.SendWhisperTo(_chatMessage.Player, "Thanks!");
         }
     }
 }

@@ -33,6 +33,7 @@
             this.inMapButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.descriptionLabel = new System.Windows.Forms.Label();
+            this.thankButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // inviteButton
@@ -44,7 +45,7 @@
             this.inviteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inviteButton.ForeColor = System.Drawing.Color.White;
             this.inviteButton.Location = new System.Drawing.Point(18, 134);
-            this.inviteButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inviteButton.Margin = new System.Windows.Forms.Padding(4);
             this.inviteButton.Name = "inviteButton";
             this.inviteButton.Size = new System.Drawing.Size(124, 49);
             this.inviteButton.TabIndex = 1;
@@ -61,7 +62,7 @@
             this.soldButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.soldButton.ForeColor = System.Drawing.Color.White;
             this.soldButton.Location = new System.Drawing.Point(165, 191);
-            this.soldButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.soldButton.Margin = new System.Windows.Forms.Padding(4);
             this.soldButton.Name = "soldButton";
             this.soldButton.Size = new System.Drawing.Size(124, 49);
             this.soldButton.TabIndex = 3;
@@ -78,7 +79,7 @@
             this.inMapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inMapButton.ForeColor = System.Drawing.Color.White;
             this.inMapButton.Location = new System.Drawing.Point(165, 134);
-            this.inMapButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inMapButton.Margin = new System.Windows.Forms.Padding(4);
             this.inMapButton.Name = "inMapButton";
             this.inMapButton.Size = new System.Drawing.Size(124, 49);
             this.inMapButton.TabIndex = 4;
@@ -95,7 +96,7 @@
             this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.closeButton.ForeColor = System.Drawing.Color.White;
             this.closeButton.Location = new System.Drawing.Point(18, 191);
-            this.closeButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.closeButton.Margin = new System.Windows.Forms.Padding(4);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(124, 49);
             this.closeButton.TabIndex = 6;
@@ -106,7 +107,7 @@
             // descriptionLabel
             // 
             this.descriptionLabel.BackColor = System.Drawing.Color.Transparent;
-            this.descriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionLabel.ForeColor = System.Drawing.Color.White;
             this.descriptionLabel.Location = new System.Drawing.Point(13, 9);
             this.descriptionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -115,6 +116,25 @@
             this.descriptionLabel.TabIndex = 7;
             this.descriptionLabel.Text = "Poorjoy\'s Asylum for 10 chaos in Legacy";
             this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.descriptionLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            // 
+            // thankButton
+            // 
+            this.thankButton.BackColor = System.Drawing.Color.Gray;
+            this.thankButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.thankButton.FlatAppearance.BorderSize = 0;
+            this.thankButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.thankButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.thankButton.ForeColor = System.Drawing.Color.White;
+            this.thankButton.Location = new System.Drawing.Point(18, 134);
+            this.thankButton.Margin = new System.Windows.Forms.Padding(4);
+            this.thankButton.Name = "thankButton";
+            this.thankButton.Size = new System.Drawing.Size(271, 49);
+            this.thankButton.TabIndex = 8;
+            this.thankButton.Text = "Thank";
+            this.thankButton.UseVisualStyleBackColor = false;
+            this.thankButton.Visible = false;
+            this.thankButton.Click += new System.EventHandler(this.thankButton_Click);
             // 
             // TradeForm
             // 
@@ -122,14 +142,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(302, 253);
+            this.Controls.Add(this.thankButton);
             this.Controls.Add(this.descriptionLabel);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.inMapButton);
             this.Controls.Add(this.soldButton);
             this.Controls.Add(this.inviteButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TradeForm";
             this.Text = "TradeForm";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.ResumeLayout(false);
 
         }
@@ -140,5 +162,6 @@
         private System.Windows.Forms.Button inMapButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Label descriptionLabel;
+        private System.Windows.Forms.Button thankButton;
     }
 }

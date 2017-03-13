@@ -23,7 +23,7 @@ namespace FormHelper
         {
             InterceptKeys.KeyPressedEvent += KeyPressedEvent;
             ChatReader.ChatMessageDetected += ChatMessageDetected;
-            this.Resize += Form1_Resize;
+            this.Resize += MainFormResizeEvent;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
@@ -42,7 +42,7 @@ namespace FormHelper
             _chatReader.SetLogPath(_helperSettings.LogPath);
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
+        private void MainFormResizeEvent(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
@@ -61,18 +61,18 @@ namespace FormHelper
             }            
         }
 
+        private void KeyPressedEvent(object sender, PoEHelper.KeyEventArgs args)
+        {
+            _inputSender.Command(args.LastKeys, args.Key);
+        }
+
         private void savePathButton_Click(object sender, EventArgs e)
         {
             _helperSettings.LogPath = pathTextBox.Text;
             _helperSettings.Save();
             loadApplicationSettings();
         }
-
-        private void KeyPressedEvent(object sender, PoEHelper.KeyEventArgs args)
-        {
-            _inputSender.Command(args.LastKeys, args.Key);
-        }
-
+        
         private void startButton_Click(object sender, EventArgs e)
         {
             startButton.Text = startButton.Text == "Start" ? "Stop" : "Start";

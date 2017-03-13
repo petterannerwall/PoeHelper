@@ -1,0 +1,16 @@
+﻿<Window x:Class="ExileHelper.TradeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExileHelper"
+        mc:Ignorable="d"
+        Title="TradeWindow" Height="201.804" Width="272.165">
+    <Grid>
+        <Button x:Name="inviteButton" Content="Invite" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,138,0,0" Height="23" Click="inviteButton_Click"/>
+        <Button x:Name="inMapButton" Content="In Map" HorizontalAlignment="Left" Margin="90,138,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="inMapButton_Click"/>
+        <Button x:Name="soldButton" Content="Sold" HorizontalAlignment="Left" Margin="170,138,0,0" VerticalAlignment="Top" Width="75" Height="23" RenderTransformOrigin="1.407,0.526" Click="soldButton_Click"/>
+        <TextBlock x:Name="messageTextBlock" HorizontalAlignment="Stretch" Margin="10,10,17.4,39" TextWrapping="Wrap" VerticalAlignment="Center" Height="123" Width="235" Padding="0" Text="sdfsadf"/>
+
+    </Grid>
+</Window>

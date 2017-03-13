@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace FormHelper.Models
+namespace Core.Models
 {
     //Courtesy of https://github.com/Panaetius/PoETradeMonitor
-    public class ChatMessage
+    public class Message
     {
         public enum MessageType
         {
@@ -26,12 +22,12 @@ namespace FormHelper.Models
         public bool Recived { get; set; }
         public DateTime Time { get; set; }
         public MessageType Type { get; set; }
-        public string Message { get; set; }
-        public PoETradeMessage TradeMessage { get; set; }
+        public string Text { get; set; }
+        public TradeMessage TradeMessage { get; set; }
 
-        public ChatMessage(string message)
+        public Message(string message)
         {
-            
+
             const string pattern = @"(\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}:\d{2})[^\]]+\]\s([$@%#])([^:]+):\s(.*)";
 
             var matches = Regex.Matches(message, pattern, RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline | RegexOptions.IgnoreCase);
@@ -46,7 +42,7 @@ namespace FormHelper.Models
             Player = matches[0].Groups[3].Value;
             Player = Player.Split(' ').Last();
 
-            Message = matches[0].Groups[4].Value;
+            Text = matches[0].Groups[4].Value;
 
             var type = matches[0].Groups[2].Value;
 
@@ -74,10 +70,10 @@ namespace FormHelper.Models
                 Recived = message.Contains("From") ? true : false;
             }
 
-            if (Type == MessageType.Private && Message.Contains("I would like to buy"))
+            if (Type == MessageType.Private && Text.Contains("I would like to buy"))
             {
                 Type = MessageType.PoETrade;
-                TradeMessage = new PoETradeMessage(Message);
+                TradeMessage = new TradeMessage(Text);
             }
         }
 
