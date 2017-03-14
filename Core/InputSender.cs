@@ -19,6 +19,7 @@ namespace Core
             if (success)
             {
                 string text = string.Format("@{0} {1}", player, message);
+                SendKeys.SendWait("{DELETE}");
                 SendKeys.SendWait("{ENTER}");
                 TypeString(text);
                 SendKeys.SendWait("{ENTER}");
@@ -32,6 +33,7 @@ namespace Core
             var success = WindowHelper.SetFocusToPathOfExileWindow();
             if (success)
             {
+                SendKeys.SendWait("{DELETE}");
                 SendKeys.SendWait("{ENTER}");
                 TypeString("/invite " + player);
                 SendKeys.SendWait("{ENTER}");
@@ -42,6 +44,7 @@ namespace Core
         private void SendCommand(string text)
         {
             BlockInput(true);
+            SendKeys.SendWait("{DELETE}");
             SendKeys.SendWait("{ENTER}");
             TypeString(text);
             SendKeys.SendWait("{ENTER}");
@@ -51,8 +54,19 @@ namespace Core
         private void SendWhisperReply(string reply)
         {
             BlockInput(true);
+            SendKeys.SendWait("{DELETE}");
             SendKeys.SendWait("^{ENTER}");
             TypeString(reply);
+            SendKeys.SendWait("{ENTER}");
+            BlockInput(false);
+        }
+
+        public void SendTradeRequest(string player)
+        {
+            BlockInput(true);
+            SendKeys.SendWait("{DELETE}");
+            SendKeys.SendWait("{ENTER}");
+            TypeString("/tradewith " + player);
             SendKeys.SendWait("{ENTER}");
             BlockInput(false);
         }

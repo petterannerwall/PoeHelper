@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExileHelper"
         mc:Ignorable="d"
-        Title="ExileHelper" Height="167.045" Width="301.61">
+        Title="ExileHelper" Height="175.045" Width="309.61" Background="#FF323232">
     <Grid>
         <Button x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="210,105,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="startButton_Click"/>
         <TextBox x:Name="pathTextBox" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" VerticalAlignment="Top" Width="195" MaxLines="1"/>
         <Button x:Name="savePathButton" Content="Save" HorizontalAlignment="Left" Margin="210,36,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="savePathButton_Click"/>
-        <Label x:Name="pathLabel" Content="Path to Client Log" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="pathLabel" Content="Path to Client Log" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="WhiteSmoke"/>
         <TextBox x:Name="debugTextBox" HorizontalAlignment="Left" Height="23" Margin="10,64,0,0" VerticalAlignment="Top" Width="195" MaxLines="1"/>
         <Button x:Name="debugButton" Content="Debug" HorizontalAlignment="Left" Margin="210,64,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="debugButton_Click"/>
+        <Button x:Name="settingsButton" Content="Settings" HorizontalAlignment="Left" Height="23" Margin="10,105,0,0" VerticalAlignment="Top" Width="91" Click="settingsButton_Click"/>
+        <Button x:Name="demoButton" Content="Demo" HorizontalAlignment="Left" Height="23" Margin="106,105,0,0" VerticalAlignment="Top" Width="91" Click="demoButton_Click"/>
 
     </Grid>
 </Window>

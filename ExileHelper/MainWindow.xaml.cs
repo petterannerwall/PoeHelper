@@ -23,33 +23,53 @@ namespace ExileHelper
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static bool tradeWindowOpen = false;
         Settings _settings;
         MessageReader _messageReader;
 
         public MainWindow()
         {
-            InitializeComponent();
-            loadSettings();
             
+
+            MessageReader.NewMessage += NewMessageDetected;
+            InitializeComponent();
+
+            _settings = Settings.Load();
+            _settings.Save();
+            pathTextBox.Text = _settings.LogPath;
+
+            System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+            ni.Icon = new System.Drawing.Icon("icon.ico");
+            ni.Visible = true;
+            ni.DoubleClick +=
+                delegate (object sender, EventArgs args)
+                {
+                    this.Show();
+                    this.WindowState = System.Windows.WindowState.Normal;
+                };
+
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == System.Windows.WindowState.Minimized)
+                this.Hide();
+            base.OnStateChanged(e);
         }
 
         private void NewMessageDetected(object sender, MessageEventArgs args)
         {
-            if (args.Message.Type == Message.MessageType.PoETrade)
+            if (args.Message.Type == Message.MessageType.IncTradeMessage && !tradeWindowOpen)
             {
+                tradeWindowOpen = true;
+
                 Application.Current.Dispatcher.Invoke((Action)delegate {
-                    TradeWindow tradeWindow = new TradeWindow(args.Message);
+                    TradeWindow tradeWindow = new TradeWindow();
                     tradeWindow.Show();
                 });
             }
         }
-
-        private void loadSettings()
-        {
-            _settings = Settings.Load();
-            pathTextBox.Text = _settings.LogPath;
-        }
-
+        
         private void savePathButton_Click(object sender, RoutedEventArgs e)
         {
             if (File.Exists(pathTextBox.Text))
@@ -70,15 +90,29 @@ namespace ExileHelper
             if (_settings.LogPath != string.Empty)
             {
                 _messageReader = new MessageReader(_settings.LogPath);
-                _messageReader.NewMessage += NewMessageDetected;
             }
         }
 
         private void debugButton_Click(object sender, RoutedEventArgs e)
         {
-            _messageReader = new MessageReader(_settings.LogPath);
-            _messageReader.NewMessage += NewMessageDetected;
+            _messageReader = new MessageReader();
             _messageReader.DebugMessage(debugTextBox.Text);
         }
+
+        private void demoButton_Click(object sender, RoutedEventArgs e)
+        {
+            var InfoWindow = new InformationWindow(new Message("") { });
+            var TradeWindow = new TradeWindow();
+
+            InfoWindow.Show();
+            TradeWindow.Show();
+        }
+
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new SettingsWindow();
+            window.Show();
+        }
+        
     }
 }

@@ -1,0 +1,21 @@
+﻿<Window x:Class="ExileHelper.InformationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExileHelper"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        Background="#FF323232"
+        mc:Ignorable="d"
+        Title="InformationWindow" Height="100" Width="200">
+    <Grid>
+        <Label x:Name="titleLabel" Content="Trade Information" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="14"/>
+        <TextBlock x:Name="informationTextBlock" HorizontalAlignment="Left" Margin="18,39,0,0" TextWrapping="Wrap" Text="Big_P want 1 master cartographers sextant for 5 chaos" VerticalAlignment="Top" Height="33" Width="172"/>
+        <Label x:Name="closeLabel" Content="X" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="182,0,0,0" RenderTransformOrigin="5.954,1.118" MouseDown="closeLabel_MouseDown"/>
+
+    </Grid>
+</Window>

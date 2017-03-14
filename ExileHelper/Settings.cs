@@ -13,6 +13,12 @@ namespace ExileHelper
     {
         public string LogPath = "";
         public string CharacterName = "";
+        public double TradeWindowTop = 0;
+        public double TradeWindowLeft = 0;
+        public double TradeWindowHeight = 300;
+        public string InMapMessage = "In map at the moment, il get back when i go to town";
+        public string SoldMessage = "Item already sold: ";
+        public bool AutoTrade = false;
     }
 
     public class AppSettings<T> where T : new()

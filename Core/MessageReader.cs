@@ -15,8 +15,8 @@ namespace Core
         private string _clientLogPath;
         private FileSystemWatcher _fileWatcher;
         private Timer _fileTimer;
-        public delegate void MessageEventHandler(object sender, MessageEventArgs args);
-        public MessageEventHandler NewMessage;
+        public  delegate void MessageEventHandler(object sender, MessageEventArgs args);
+        public static MessageEventHandler NewMessage;
 
         public MessageReader(string path)
         {
@@ -33,6 +33,11 @@ namespace Core
             _fileTimer = new Timer(250);
             _fileTimer.Elapsed += _fileTimer_Elapsed;
             _fileTimer.Start();
+        }
+
+        public MessageReader()
+        {
+
         }
 
         private void _fileTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -52,26 +57,25 @@ namespace Core
 
         private void checkForUpdates(string debug = null)
         {
-            var reverseReader = new ReverseLineReader(_clientLogPath);
-            var lines = reverseReader.Take(10).ToList();
-
             if (debug == null)
             {
+                var reverseReader = new ReverseLineReader(_clientLogPath);
+                var lines = reverseReader.Take(10).ToList();
+
                 if (_lastLines == null)
                 {
                     _lastLines = lines;
                 }
-                else if (_lastLines != lines)
+                else
                 {
-                    var newLines = lines.Except(_lastLines);
+                    var newLines = lines.Except(_lastLines).ToList();
+                    _lastLines = lines;
 
                     foreach (var line in newLines)
                     {
                         Message message = new Message(line);
                         NewMessage(null, new MessageEventArgs(message));
                     }
-
-                    _lastLines = lines;
                 }
             }
             else
