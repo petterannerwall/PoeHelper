@@ -57,7 +57,8 @@ namespace ExileHelper
                 {
                     _inputSender.SendTradeRequest(args.Message.Player);
                     _currentlyTrading = true;
-                    Application.Current.Dispatcher.Invoke((Action)delegate {
+                    Application.Current.Dispatcher.Invoke((Action)delegate
+                    {
                         InformationWindow informationWindow = new InformationWindow(pendingTrade);
                         informationWindow.Show();
                         _informationWindow = informationWindow;
@@ -89,18 +90,6 @@ namespace ExileHelper
             Message message = (Message)cmd.DataContext;
             _inputSender.InvitePlayerToParty(message.Player);
             Player.AcceptedTrades.Add(message);
-
-            var inviteButton = Helpers.FindVisualChildren<Button>(tradeListBox).FirstOrDefault(t => t.Name == "inviteButton");
-            var inMapButton = Helpers.FindVisualChildren<Button>(tradeListBox).FirstOrDefault(t => t.Name == "inMapButton");
-            var soldButton = Helpers.FindVisualChildren<Button>(tradeListBox).FirstOrDefault(t => t.Name == "soldButton");
-
-            if (inviteButton != null)
-                inviteButton.Content = "Reinvite";
-            if (inMapButton != null)
-                inMapButton.Visibility = Visibility.Hidden;
-            if (soldButton != null)
-                soldButton.Visibility = Visibility.Hidden;
-
         }
 
         private void inMapButton_Click(object sender, RoutedEventArgs e)
@@ -125,10 +114,14 @@ namespace ExileHelper
             Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
             updateList();
 
-            if (_informationWindow.message.ID == message.ID)
+            if (_informationWindow != null)
             {
-                _informationWindow.Close();
-                _informationWindow = null;
+
+                if (_informationWindow.message.ID == message.ID)
+                {
+                    _informationWindow.Close();
+                    _informationWindow = null;
+                }
             }
 
             if (Player.PendingTrades.Count == 0)
@@ -147,9 +140,9 @@ namespace ExileHelper
         {
             Application.Current.Dispatcher.Invoke((Action)delegate
             {
-                //TradeList = new ObservableCollection<Message>(Player.PendingTrades);
-                //TradeList.OrderBy(t => t.Time);
-                //tradeListBox.ItemsSource = TradeList;
+                TradeList = new ObservableCollection<Message>(Player.PendingTrades);
+                TradeList.OrderBy(t => t.Time);
+                tradeListBox.ItemsSource = TradeList;
             });
         }
 

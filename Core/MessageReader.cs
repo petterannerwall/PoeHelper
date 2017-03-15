@@ -15,7 +15,7 @@ namespace Core
         private string _clientLogPath;
         private FileSystemWatcher _fileWatcher;
         private Timer _fileTimer;
-        public  delegate void MessageEventHandler(object sender, MessageEventArgs args);
+        public delegate void MessageEventHandler(object sender, MessageEventArgs args);
         public static MessageEventHandler NewMessage;
 
         public MessageReader(string path)

@@ -111,18 +111,18 @@ namespace ExileHelper
             switch (hotkey_id)
             {
                 case 9000:
-                    HotkeyPressed(null, new HotkeyPressedEventArgs("F1"));
-                    _inputSender.SendCommand("/hideout");
-                    break;
-                case 9001:
-                    HotkeyPressed(null, new HotkeyPressedEventArgs("F2"));
+                    //HotkeyPressed(null, new HotkeyPressedEventArgs("F1"));
                     _inputSender.SendCommand("/remaining");
                     break;
+                case 9001:
+                    //HotkeyPressed(null, new HotkeyPressedEventArgs("F2"));
+                    _inputSender.SendCommand("/hideout");
+                    break;
                 case 9002:
-                    HotkeyPressed(null, new HotkeyPressedEventArgs("F3"));
+                    //HotkeyPressed(null, new HotkeyPressedEventArgs("F3"));
                     break;
                 case 9003:
-                    HotkeyPressed(null, new HotkeyPressedEventArgs("F4"));
+                    //HotkeyPressed(null, new HotkeyPressedEventArgs("F4"));
                     break;
             }
 
