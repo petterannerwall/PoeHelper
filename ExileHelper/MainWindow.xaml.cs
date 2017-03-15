@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Core.Models;
+using ExileHelper.Models;
 
 namespace ExileHelper
 {
@@ -23,14 +24,15 @@ namespace ExileHelper
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static bool tradeWindowOpen = false;
+        public static bool TradeWindowOpen = false;
         Settings _settings;
         MessageReader _messageReader;
+        private HotkeyManager _hotkey;
 
         public MainWindow()
         {
             
-
+            
             MessageReader.NewMessage += NewMessageDetected;
             InitializeComponent();
 
@@ -39,7 +41,6 @@ namespace ExileHelper
             pathTextBox.Text = _settings.LogPath;
 
             System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
-            ni.Icon = new System.Drawing.Icon("icon.ico");
             ni.Visible = true;
             ni.DoubleClick +=
                 delegate (object sender, EventArgs args)
@@ -59,9 +60,9 @@ namespace ExileHelper
 
         private void NewMessageDetected(object sender, MessageEventArgs args)
         {
-            if (args.Message.Type == Message.MessageType.IncTradeMessage && !tradeWindowOpen)
+            if (args.Message.Type == Message.MessageType.IncTradeMessage && !TradeWindowOpen)
             {
-                tradeWindowOpen = true;
+                TradeWindowOpen = true;
 
                 Application.Current.Dispatcher.Invoke((Action)delegate {
                     TradeWindow tradeWindow = new TradeWindow();
@@ -113,6 +114,19 @@ namespace ExileHelper
             var window = new SettingsWindow();
             window.Show();
         }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            _hotkey = new HotkeyManager(this);
+            _hotkey.RegisterHotKey();
+        }
         
+
+        protected override void OnClosed(EventArgs e)
+        {
+            _hotkey.UnregisterHotKey();
+            base.OnClosed(e);
+        }
+
     }
 }

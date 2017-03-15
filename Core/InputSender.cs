@@ -41,7 +41,7 @@ namespace Core
             }
         }
 
-        private void SendCommand(string text)
+        public void SendCommand(string text)
         {
             BlockInput(true);
             SendKeys.SendWait("{DELETE}");

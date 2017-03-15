@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Core.Models;
 using System.Collections.ObjectModel;
+using System.Windows.Interop;
 
 namespace ExileHelper
 {
@@ -22,6 +23,7 @@ namespace ExileHelper
     /// </summary>
     public partial class TradeWindow : Window
     {
+        private HotkeyManager _hotkey;
         private Settings _settings;
         private InputSender _inputSender;
         private MessageReader _messageReader;
@@ -70,7 +72,7 @@ namespace ExileHelper
         {
             Player.PendingTrades = new List<Message>();
             Player.AcceptedTrades = new List<Message>();
-            MainWindow.tradeWindowOpen = false;
+            MainWindow.TradeWindowOpen = false;
             if (_informationWindow != null)
             {
                 _informationWindow.Close();
@@ -147,5 +149,7 @@ namespace ExileHelper
             });
 
         }
+
+        
     }
 }
