@@ -74,10 +74,12 @@ namespace Core
 
         private void TypeString(string text)
         {
-            foreach (char ch in text)
-            {
-                SendKeys.SendWait(ch.ToString());
-            }
+            SendKeys.SendWait(text);
+
+            //foreach (char ch in text)
+            //{
+            //    SendKeys.SendWait(ch.ToString());
+            //}
         }
 
         [System.Runtime.InteropServices.DllImportAttribute("user32.dll", EntryPoint = "BlockInput")]

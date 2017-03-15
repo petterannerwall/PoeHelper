@@ -4,7 +4,10 @@
              xmlns:local="clr-namespace:ExileHelper"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="TradeListButton" TargetType="{x:Type Button}">
+        <Style TargetType="{x:Type FrameworkElement}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        </Style>
+        <!--<Style x:Key="TradeListButton" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#373737" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontSize" Value="15" />
@@ -35,7 +38,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
         <Style TargetType="{x:Type Button}">
             <Setter Property="Foreground" Value="WhiteSmoke" />
             <Setter Property="Background" Value="#FF4F4F4F"/>

@@ -9,19 +9,18 @@
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip"
         ShowInTaskbar="False"
-        Title="TradesWindow" Width="300" Background="#FF323232" Foreground="{x:Null}">
+        MaxWidth="300"
+        MinWidth="300"
+        Title="TradeWindow" Width="300" Background="#FF323232" Foreground="{x:Null}">
 
     <Window.Resources>
         <local:UcFirstConverter x:Key="UcFirstConverter" />
 
     </Window.Resources>
     <Grid Background="#FF323232">
-        <ListBox x:Name="tradesListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#FF323232" Margin="0,25,0,34" BorderBrush="{x:Null}" BorderThickness="0" MouseDown="tradesListBox_MouseDown">
+        <ListBox x:Name="tradeListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#FF323232" Margin="0,28,0,34" BorderBrush="{x:Null}" BorderThickness="0" MouseDown="tradesListBox_MouseDown" MouseUp="tradeListBox_MouseUp">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
-                    <Style.Setters>
-                        <Setter Property="BorderThickness" Value="0" />
-                    </Style.Setters>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="Transparent" />
@@ -31,7 +30,35 @@
                     </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
+            <Grid Width="290" Height="85" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <!--<Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Poorjoy's asylum map" FontWeight="SemiBold"  HorizontalAlignment="Left" Foreground="White" Margin="10,0,0,50" Grid.RowSpan="2" />
+                <Label Grid.Row="0" Content="10 chaos" HorizontalAlignment="Right"  Foreground="White" Margin="0,0,10,50" Grid.RowSpan="2" RenderTransformOrigin="-0.763,0.618" Width="117" HorizontalContentAlignment="Right" />
+                <Label Grid.Row="0" Content="GhostInTheEnergySheild" HorizontalAlignment="Left" Foreground="White" Margin="10,17,0,31" Grid.RowSpan="2" Width="271" FontSize="10.667"/>
+                <Label Grid.Row="0" Content="stash tab &quot;&lt;3&quot;" HorizontalAlignment="Right" Foreground="White" Margin="0,0,10,31" Grid.RowSpan="2" Width="215" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="10.667" Height="29"/>
+                <Button x:Name="inviteButton" Grid.Row="1" Content="Invite" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="10,20,0,1" Height="30" Click="inviteButton_Click" />
+                <Button x:Name="inMapButton" Visibility="Visible"  Grid.Row="1" Content="In Map" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="79,20,0,1" Height="30" Click="inMapButton_Click" />
+                <Button x:Name="soldButton" Visibility="Visible" Grid.Row="1" Content="Sold" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="148,20,0,1" Height="30" Click="soldButton_Click"  />
+                <Button x:Name="tradeButton" Visibility="Hidden" Grid.Row="1" Content="Trade" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="79,20,0,1" Height="30" Click="TradeButton_OnClick" />
+                <Button x:Name="thankButton" Visibility="Hidden" Grid.Row="1" Content="Thank" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="148,20,0,1" Height="30" Click="ThankButton_OnClick"  />
+                <Button x:Name="closeButton" Grid.Row="1" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="217,20,0,1" Height="30" Click="closeButton_Click" />-->
+            </Grid>
+
+            <!--<ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="281" Height="85" VerticalAlignment="Top" HorizontalAlignment="Center" Background="#FF3F3F3F">
                         <Grid.RowDefinitions>
@@ -44,15 +71,16 @@
                         <Button x:Name="inviteButton" Grid.Row="1" Content="Invite" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Margin="10,19.4,0,1" Height="30" Click="inviteButton_Click" />
                         <Button x:Name="inMapButton" Grid.Row="1" Content="In Map" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Margin="75,19.4,0,1" Height="30" Click="inMapButton_Click" />
                         <Button x:Name="soldButton" Grid.Row="1" Content="Sold" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Margin="140,19.4,0,1" Height="30" Click="soldButton_Click"  />
+                        <Button x:Name="tradeButton" Visibility="Hidden" Grid.Row="1" Content="Trade" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Margin="75,19.4,0,1" Height="30" Click="TradeButton_OnClick" />
+                        <Button x:Name="thankButton" Visibility="Hidden" Grid.Row="1" Content="Thank" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Margin="140,19.4,0,1" Height="30" Click="ThankButton_OnClick"  />
                         <Button x:Name="closeButton" Grid.Row="1" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Margin="205,19.4,0,1" Height="30" Click="closeButton_Click" />
                     </Grid>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
+            </ListBox.ItemTemplate>-->
         </ListBox>
         <Button x:Name="closeWindowButton" Content="Close All Trades" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="106" Margin="0,0,10,10" Click="closeWindowButton_Click" RenderTransformOrigin="0.149,-0.268"/>
-        <Label x:Name="TitleLabel" Content="Pending Trades" HorizontalAlignment="Left" VerticalAlignment="Top" Width="294" Height="30" Background="#FF323232" Margin="0,-5,-0.4,0" Foreground="#FFDADADA" FontWeight="SemiBold" FontSize="16" MouseDown="tradesListBox_MouseDown"/>
-        <Button x:Name="savePositionButton" Content="Save position" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="64" Margin="0,0,226,10" RenderTransformOrigin="0.149,-0.268" FontSize="10" Click="savePositionButton_Click"/>
-        <Label x:Name="closeLabel" Content="X" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="272,-1,0,0" RenderTransformOrigin="5.954,1.118" MouseDown="closeWindowButton_Click"/>
+        <Label x:Name="TitleLabel" Content="Pending Trades" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="33" Background="#FF323232" Foreground="#FFDADADA" FontWeight="SemiBold" FontSize="16" MouseDown="tradesListBox_MouseDown" MouseUp="tradeListBox_MouseUp"/>
+        <Label x:Name="closeLabel" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-3,-3,0" RenderTransformOrigin="5.954,1.118" MouseDown="closeWindowButton_Click" Height="23" Width="24" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>

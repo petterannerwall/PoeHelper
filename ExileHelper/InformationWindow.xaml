@@ -15,7 +15,7 @@
     <Grid>
         <Label x:Name="titleLabel" Content="Trade Information" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="14"/>
         <TextBlock x:Name="informationTextBlock" HorizontalAlignment="Left" Margin="18,39,0,0" TextWrapping="Wrap" Text="Big_P want 1 master cartographers sextant for 5 chaos" VerticalAlignment="Top" Height="33" Width="172"/>
-        <Label x:Name="closeLabel" Content="X" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="182,0,0,0" RenderTransformOrigin="5.954,1.118" MouseDown="closeLabel_MouseDown"/>
+        <Label x:Name="closeLabel" Content="X" HorizontalAlignment="Right" RenderTransformOrigin="5.954,1.118" MouseDown="closeLabel_MouseDown" Height="24" Width="24" VerticalAlignment="Top" Margin="0,-5,-6,0"/>
 
     </Grid>
 </Window>
