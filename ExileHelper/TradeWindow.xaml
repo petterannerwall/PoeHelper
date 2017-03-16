@@ -61,12 +61,12 @@
                         <Label Grid.Row="0" Content="{Binding Price.Text}" HorizontalAlignment="Right"  Foreground="White" Margin="0,0,10,50" Grid.RowSpan="2" RenderTransformOrigin="-0.763,0.618" Width="117" HorizontalContentAlignment="Right" />
                         <Label Grid.Row="0" Content="{Binding Player, Converter={StaticResource UcFirstConverter}}" HorizontalAlignment="Left" Foreground="White" Margin="10,17,0,31" Grid.RowSpan="2" Width="271" FontSize="10.667"/>
                         <Label Grid.Row="0" Content="stash tab &quot;&lt;3&quot;" HorizontalAlignment="Right" Foreground="White" Margin="0,0,10,31" Grid.RowSpan="2" Width="215" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="10.667" Height="29"/>
-                        <Button x:Name="inviteButton" Grid.Row="1" Content="Invite" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="10,20,0,1" Height="30" Click="inviteButton_Click" />
-                        <Button x:Name="inMapButton" Visibility="Visible"  Grid.Row="1" Content="In Map" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="79,20,0,1" Height="30" Click="inMapButton_Click" />
-                        <Button x:Name="soldButton" Visibility="Visible" Grid.Row="1" Content="Sold" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="148,20,0,1" Height="30" Click="soldButton_Click"  />
-                        <Button x:Name="tradeButton" Visibility="Hidden" Grid.Row="1" Content="Trade" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="79,20,0,1" Height="30" Click="TradeButton_OnClick" />
-                        <Button x:Name="thankButton" Visibility="Hidden" Grid.Row="1" Content="Thank" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="148,20,0,1" Height="30" Click="ThankButton_OnClick"  />
-                        <Button x:Name="closeButton" Grid.Row="1" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Center" Width="64" Margin="217,20,0,1" Height="30" Click="closeButton_Click" />
+                        <Button x:Name="inviteButton" Grid.Row="1" Content="Invite" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Margin="10,19.4,0,1" Height="30" Click="inviteButton_Click" />
+                        <Button x:Name="inMapButton"   Grid.Row="1" Content="In Map" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Margin="145,19.4,0,1" Height="30" Click="inMapButton_Click" RenderTransformOrigin="0.14,0.533" />
+                        <Button x:Name="soldButton"  Grid.Row="1" Content="Sold" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Margin="190,19.4,0,1" Height="30" Click="soldButton_Click"  />
+                        <Button x:Name="tradeButton"  Grid.Row="1" Content="Trade" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Margin="55,19.4,0,1" Height="30" Click="TradeButton_OnClick" />
+                        <Button x:Name="thankButton"  Grid.Row="1" Content="Thank" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Margin="100,19.4,0,1" Height="30" Click="ThankButton_OnClick"  />
+                        <Button x:Name="closeButton" Grid.Row="1" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Margin="235,19.4,0,1" Height="30" Click="closeButton_Click" RenderTransformOrigin="0.48,0.293" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

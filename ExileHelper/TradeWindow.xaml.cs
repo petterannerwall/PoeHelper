@@ -28,7 +28,7 @@ namespace ExileHelper
         private InputSender _inputSender;
         private MessageReader _messageReader;
         public ObservableCollection<Message> TradeList;
-        private InformationWindow _informationWindow;
+        //private InformationWindow _informationWindow;
         private bool _currentlyTrading = false;
 
         public TradeWindow()
@@ -39,12 +39,12 @@ namespace ExileHelper
             this.Left = _settings.TradeWindowLeft;
             this.Height = _settings.TradeWindowHeight;
             this.Topmost = true;
-            
+
             _messageReader = new MessageReader();
             _inputSender = new InputSender();
             MessageReader.NewMessage += NewMessageDetected;
             InitializeComponent();
-            
+
             updateList();
         }
 
@@ -57,12 +57,12 @@ namespace ExileHelper
                 {
                     _inputSender.SendTradeRequest(args.Message.Player);
                     _currentlyTrading = true;
-                    Application.Current.Dispatcher.Invoke((Action)delegate
-                    {
-                        InformationWindow informationWindow = new InformationWindow(pendingTrade);
-                        informationWindow.Show();
-                        _informationWindow = informationWindow;
-                    });
+                    //Application.Current.Dispatcher.Invoke((Action)delegate
+                    ////{
+                    ////    InformationWindow informationWindow = new InformationWindow(pendingTrade);
+                    ////    informationWindow.Show();
+                    ////    _informationWindow = informationWindow;
+                    //});
                 }
             }
 
@@ -74,19 +74,17 @@ namespace ExileHelper
             Player.PendingTrades = new List<Message>();
             Player.AcceptedTrades = new List<Message>();
             MainWindow.TradeWindowOpen = false;
-            if (_informationWindow != null)
-            {
-                _informationWindow.Close();
-                _informationWindow = null;
-            }
+            //if (_informationWindow != null)
+            //{
+            //    _informationWindow.Close();
+            //    _informationWindow = null;
+            //}
             this.Close();
         }
 
         private void inviteButton_Click(object sender, RoutedEventArgs e)
         {
             var cmd = (Button)sender;
-            cmd.Content = "Reinvite";
-            
             Message message = (Message)cmd.DataContext;
             _inputSender.InvitePlayerToParty(message.Player);
             Player.AcceptedTrades.Add(message);
@@ -103,8 +101,10 @@ namespace ExileHelper
         {
             var cmd = (Button)sender;
             Message message = (Message)cmd.DataContext;
-            _inputSender.SendWhisperTo(message.Player, _settings.SoldMessage+ " " + message.Item);
-            closeButton_Click(sender, e);
+            _inputSender.SendWhisperTo(message.Player, _settings.SoldMessage + " " + message.Item);
+            Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
+            updateList();
+
         }
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -112,23 +112,26 @@ namespace ExileHelper
             Message message = (Message)cmd.DataContext;
             Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
             Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
-            updateList();
-
-            if (_informationWindow != null)
-            {
-
-                if (_informationWindow.message.ID == message.ID)
-                {
-                    _informationWindow.Close();
-                    _informationWindow = null;
-                }
-            }
 
             if (Player.PendingTrades.Count == 0)
             {
-
+                MainWindow.TradeWindowOpen = false;
                 this.Close();
             }
+            else
+            {
+                updateList();
+            }
+
+
+            //if (_informationWindow != null)            {
+
+            //    if (_informationWindow.message.ID == message.ID)
+            //    {
+            //        _informationWindow.Close();
+            //        _informationWindow = null;
+            //    }
+            //}
         }
 
         private void tradesListBox_MouseDown(object sender, MouseButtonEventArgs e)
@@ -151,16 +154,33 @@ namespace ExileHelper
             var cmd = (Button)sender;
             Message message = (Message)cmd.DataContext;
             _inputSender.SendTradeRequest(message.Player);
+            //InformationWindow informationWindow = new InformationWindow(message);
+            //informationWindow.Show();
+            //_informationWindow = informationWindow;
         }
 
         private void ThankButton_OnClick(object sender, RoutedEventArgs e)
         {
             var cmd = (Button)sender;
             Message message = (Message)cmd.DataContext;
-            _inputSender.SendWhisperTo(message.Player,"Thanks");
-            _currentlyTrading = true;
+            _inputSender.SendWhisperTo(message.Player, "Thanks");
+            _currentlyTrading = false;
+
+            _inputSender.KickPlayerFromParty(message.Player);
+            Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
+            Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
+
+            if (Player.PendingTrades.Count == 0)
+            {
+                MainWindow.TradeWindowOpen = false;
+                this.Close();
+            }
+            else
+            {
+                updateList();
+            }
         }
-        
+
 
         private void tradeListBox_MouseUp(object sender, MouseButtonEventArgs e)
         {

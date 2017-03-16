@@ -63,9 +63,9 @@ namespace Core.Models
             
             if ((message.Contains("you have entered") && message.Contains("hideout.")) || message.Contains("you have entered") || message.Contains("entering area hideout"))
                 Type = MessageType.SelfEnteringArea;
-            else if ((message.Contains("@from") && message.Contains("hi, i would like")) || message.Contains("hi, i'd like"))
+            else if ((message.Contains("@from") && message.Contains("hi, i would like")) || message.Contains("@from") && message.Contains("hi, i'd like"))
                 Type = MessageType.IncTradeMessage;
-            else if ((message.Contains("@to") && message.Contains("hi, i would like")) || message.Contains("hi, i'd like"))
+            else if ((message.Contains("@to") && message.Contains("hi, i would like")) || message.Contains("@to") && message.Contains("hi, i'd like"))
                 Type = MessageType.OutTradeMessage;
             else if ((message.Contains("has joined the area")))
                 Type = MessageType.OtherJoinArea;
@@ -82,18 +82,22 @@ namespace Core.Models
 
             if (Type == MessageType.IncTradeMessage)
             {
-                if (Text.Contains("hi, i would like"))
+                if (Text.Contains("hi, i would like")) //Hi, I would like to buy your Booming Essence Leaguestone of Wealth in Legacy(stash tab "Stones"; position: left 3, top 8)
                 {
-                    Item = SubstringBetween(Text, "to buy your ", " listed for");
-
                     if (Text.Contains("listed for"))
                     {
+                        Item = SubstringBetween(Text, "to buy your ", " listed for");
                         Price.Text = SubstringBetween(Text, "listed for ", " in ");
                         if (Price.Text != string.Empty)
                         {
                             Price.Count = SubstringBefore(Price.Text, " ");
                             Price.Currency = SubstringAfter(Price.Text, " ");
                         }
+                    }
+                    else
+                    {
+                        Item = SubstringBetween(Text, "to buy your ", " in");
+                        Price.Text = "Not specified";
                     }
                 }
                 else if (Text.Contains("hi, i'd like"))

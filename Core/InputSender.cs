@@ -44,31 +44,62 @@ namespace Core
         public void SendCommand(string text)
         {
             BlockInput(true);
-            SendKeys.SendWait("{DELETE}");
-            SendKeys.SendWait("{ENTER}");
-            TypeString(text);
-            SendKeys.SendWait("{ENTER}");
-            BlockInput(false);
+            var success = WindowHelper.SetFocusToPathOfExileWindow();
+            if (success)
+            {
+                BlockInput(true);
+                SendKeys.SendWait("{DELETE}");
+                SendKeys.SendWait("{ENTER}");
+                TypeString(text);
+                SendKeys.SendWait("{ENTER}");
+                BlockInput(false);
+            }
         }
 
         private void SendWhisperReply(string reply)
         {
             BlockInput(true);
-            SendKeys.SendWait("{DELETE}");
-            SendKeys.SendWait("^{ENTER}");
-            TypeString(reply);
-            SendKeys.SendWait("{ENTER}");
-            BlockInput(false);
+            var success = WindowHelper.SetFocusToPathOfExileWindow();
+            if (success)
+            {
+                BlockInput(true);
+                SendKeys.SendWait("{DELETE}");
+                SendKeys.SendWait("^{ENTER}");
+                TypeString(reply);
+                SendKeys.SendWait("{ENTER}");
+                BlockInput(false);
+            }
+        }
+
+
+        public void KickPlayerFromParty(string player)
+        {
+            BlockInput(true);
+            var success = WindowHelper.SetFocusToPathOfExileWindow();
+            if (success)
+            {
+                BlockInput(true);
+                SendKeys.SendWait("{DELETE}");
+                SendKeys.SendWait("{ENTER}");
+                TypeString("/kick " + player);
+                SendKeys.SendWait("{ENTER}");
+                BlockInput(false);
+            }
         }
 
         public void SendTradeRequest(string player)
         {
             BlockInput(true);
-            SendKeys.SendWait("{DELETE}");
-            SendKeys.SendWait("{ENTER}");
-            TypeString("/tradewith " + player);
-            SendKeys.SendWait("{ENTER}");
-            BlockInput(false);
+            var success = WindowHelper.SetFocusToPathOfExileWindow();
+            if (success)
+            {
+                BlockInput(true);
+                SendKeys.SendWait("{DELETE}");
+                SendKeys.SendWait("{ENTER}");
+                TypeString("/tradewith " + player);
+                SendKeys.SendWait("{ENTER}");
+                BlockInput(false);
+            }
         }
 
 
