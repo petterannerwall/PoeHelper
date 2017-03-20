@@ -26,16 +26,20 @@ namespace ExileHelper
             InitializeComponent();
             
             _settings = Settings.Load();
-            inMapTextBox.Text = _settings.InMapMessage;
+            hideoutTextbox.Text = _settings.Hideout;
             soldTextBox.Text = _settings.SoldMessage;
+            inMapTextBox.Text = _settings.InMapMessage;
             autoTradeCheckbox.IsChecked = _settings.AutoTrade;
+            fadeTradeListCheckbox.IsChecked = _settings.FadeTradelist;
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
+            _settings.Hideout = hideoutTextbox.Text;
             _settings.SoldMessage = soldTextBox.Text;
             _settings.InMapMessage = inMapTextBox.Text;
             _settings.AutoTrade = (bool)autoTradeCheckbox.IsChecked;
+            _settings.FadeTradelist = (bool)fadeTradeListCheckbox.IsChecked;
             _settings.Save();
             this.Close();
         }

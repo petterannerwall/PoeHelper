@@ -27,7 +27,8 @@ namespace ExileHelper
         private Settings _settings;
         private InputSender _inputSender;
         private MessageReader _messageReader;
-        public ObservableCollection<Message> TradeList;
+        public ObservableCollection<Message> _pendingTrades;
+        public ObservableCollection<Message> _acceptedTrades;
         //private InformationWindow _informationWindow;
         private bool _currentlyTrading = false;
 
@@ -39,6 +40,8 @@ namespace ExileHelper
             this.Left = _settings.TradeWindowLeft;
             this.Height = _settings.TradeWindowHeight;
             this.Topmost = true;
+            if (_settings.FadeTradelist && !this.IsMouseOver)
+                this.Opacity = 0.1;
 
             _messageReader = new MessageReader();
             _inputSender = new InputSender();
@@ -87,6 +90,7 @@ namespace ExileHelper
             var cmd = (Button)sender;
             Message message = (Message)cmd.DataContext;
             _inputSender.InvitePlayerToParty(message.Player);
+            Player.PendingTrades.Remove(message);
             Player.AcceptedTrades.Add(message);
         }
 
@@ -106,33 +110,6 @@ namespace ExileHelper
             updateList();
 
         }
-        private void closeButton_Click(object sender, RoutedEventArgs e)
-        {
-            var cmd = (Button)sender;
-            Message message = (Message)cmd.DataContext;
-            Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
-            Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
-
-            if (Player.PendingTrades.Count == 0)
-            {
-                MainWindow.TradeWindowOpen = false;
-                this.Close();
-            }
-            else
-            {
-                updateList();
-            }
-
-
-            //if (_informationWindow != null)            {
-
-            //    if (_informationWindow.message.ID == message.ID)
-            //    {
-            //        _informationWindow.Close();
-            //        _informationWindow = null;
-            //    }
-            //}
-        }
 
         private void tradesListBox_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -143,9 +120,12 @@ namespace ExileHelper
         {
             Application.Current.Dispatcher.Invoke((Action)delegate
             {
-                TradeList = new ObservableCollection<Message>(Player.PendingTrades);
-                TradeList.OrderBy(t => t.Time);
-                tradeListBox.ItemsSource = TradeList;
+                _pendingTrades = new ObservableCollection<Message>(Player.PendingTrades);
+                _acceptedTrades = new ObservableCollection<Message>(Player.AcceptedTrades);
+                _pendingTrades.OrderBy(t => t.Time);
+                _acceptedTrades.OrderBy(t => t.Time);
+                pendingTradesListBox.ItemsSource = _pendingTrades;
+                acceptedTradesListBox.ItemsSource = _acceptedTrades;
             });
         }
 
@@ -163,22 +143,13 @@ namespace ExileHelper
         {
             var cmd = (Button)sender;
             Message message = (Message)cmd.DataContext;
-            _inputSender.SendWhisperTo(message.Player, "Thanks");
+            _inputSender.SendWhisperTo(message.Player, "Thanks, stay safe!");
             _currentlyTrading = false;
 
             _inputSender.KickPlayerFromParty(message.Player);
-            Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
             Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
+            closeIfEmptyElseUpdate();
 
-            if (Player.PendingTrades.Count == 0)
-            {
-                MainWindow.TradeWindowOpen = false;
-                this.Close();
-            }
-            else
-            {
-                updateList();
-            }
         }
 
 
@@ -189,6 +160,49 @@ namespace ExileHelper
             _settings.TradeWindowHeight = this.Height;
 
             _settings.Save();
+        }
+
+        private void Window_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.Opacity = 1;
+        }
+
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (_settings.FadeTradelist)
+            {
+                this.Opacity = 0.1;
+            }
+        }
+
+        private void closePendingButton_Click(object sender, RoutedEventArgs e)
+        {
+            var cmd = (Button)sender;
+            Message message = (Message)cmd.DataContext;
+            Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
+            closeIfEmptyElseUpdate();
+        }
+
+        private void closeAcceptedButton_Click(object sender, RoutedEventArgs e)
+        {
+            var cmd = (Button)sender;
+            Message message = (Message)cmd.DataContext;
+            Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
+            closeIfEmptyElseUpdate();
+        }
+
+        private void closeIfEmptyElseUpdate()
+        {
+
+            if (Player.PendingTrades.Count == 0 && Player.AcceptedTrades.Count == 0)
+            {
+                MainWindow.TradeWindowOpen = false;
+                this.Close();
+            }
+            else
+            {
+                updateList();
+            }
         }
     }
 }

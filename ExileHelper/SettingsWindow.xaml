@@ -15,8 +15,9 @@
         <TextBox x:Name="soldTextBox" HorizontalAlignment="Left" Height="23" Margin="10,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260"/>
         <Label x:Name="soldLabel" Content="Message for Sold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,64,0,0"/>
         <CheckBox x:Name="autoTradeCheckbox" Content="Auto-trade players in hideout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,180,0,0" Checked="autoTradeCheckbox_Checked"/>
-        <TextBox x:Name="soldTextBox_Copy" HorizontalAlignment="Left" Height="23" Margin="10,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260"/>
-        <Label x:Name="inviteLabel" Content="Message for Invite" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,114,0,0"/>
+        <TextBox x:Name="hideoutTextbox" HorizontalAlignment="Left" Height="23" Margin="10,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Cursor="" Text="Battle-scarred Hideout"/>
+        <Label x:Name="hideoutNameLabel" Content="Hideout Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,114,0,0"/>
+        <CheckBox x:Name="fadeTradeListCheckbox" Content="Fade tradelist when mouse leaves" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,200,0,0" Checked="autoTradeCheckbox_Checked"/>
 
     </Grid>
 </Window>

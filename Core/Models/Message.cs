@@ -43,7 +43,7 @@ namespace Core.Models
         {
             ID = Guid.NewGuid();
             Price = new Price();
-            message = message.ToLower();
+            message = message;
 
             const string pattern = @"(\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}:\d{2})[^\]]+\]\s([$@%#]?)([^:]+)?:\s(.*)";
             var matches = Regex.Matches(message, pattern, RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline | RegexOptions.IgnoreCase);
@@ -61,11 +61,11 @@ namespace Core.Models
 
             var type = matches[0].Groups[2].Value;
             
-            if ((message.Contains("you have entered") && message.Contains("hideout.")) || message.Contains("you have entered") || message.Contains("entering area hideout"))
+            if ((message.Contains("You have entered") && message.Contains("Hideout.")) || message.Contains("You have entered") || message.Contains("Entering area Hideout"))
                 Type = MessageType.SelfEnteringArea;
-            else if ((message.Contains("@from") && message.Contains("hi, i would like")) || message.Contains("@from") && message.Contains("hi, i'd like"))
+            else if ((message.Contains("@From") && message.Contains("Hi, I would like")) || message.Contains("@From") && message.Contains("Hi, I'd like"))
                 Type = MessageType.IncTradeMessage;
-            else if ((message.Contains("@to") && message.Contains("hi, i would like")) || message.Contains("@to") && message.Contains("hi, i'd like"))
+            else if ((message.Contains("@To") && message.Contains("Hi, I would like")) || message.Contains("@To") && message.Contains("Hi, I'd like"))
                 Type = MessageType.OutTradeMessage;
             else if ((message.Contains("has joined the area")))
                 Type = MessageType.OtherJoinArea;
@@ -82,7 +82,7 @@ namespace Core.Models
 
             if (Type == MessageType.IncTradeMessage)
             {
-                if (Text.Contains("hi, i would like")) //Hi, I would like to buy your Booming Essence Leaguestone of Wealth in Legacy(stash tab "Stones"; position: left 3, top 8)
+                if (Text.Contains("Hi, I would like")) //Hi, I would like to buy your Booming Essence Leaguestone of Wealth in Legacy(stash tab "Stones"; position: left 3, top 8)
                 {
                     if (Text.Contains("listed for"))
                     {
@@ -100,7 +100,7 @@ namespace Core.Models
                         Price.Text = "Not specified";
                     }
                 }
-                else if (Text.Contains("hi, i'd like"))
+                else if (Text.Contains("Hi, I'd like"))
                 {
                     Item = SubstringBetween(Text, "to buy your ", " for my");
                     if (Item != string.Empty)

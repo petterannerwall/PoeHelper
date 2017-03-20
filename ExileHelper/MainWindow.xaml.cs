@@ -70,6 +70,11 @@ namespace ExileHelper
                     tradeWindow.Show();
                 });
             }
+            if (args.Message.Type == Message.MessageType.OtherJoinArea && Player.Area == _settings.Hideout)
+            {
+                new NotificationWindow(args.Message.Player + "entered the hideout.", 5);
+            }
+
         }
         
         private void savePathButton_Click(object sender, RoutedEventArgs e)

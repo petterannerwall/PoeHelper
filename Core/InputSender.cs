@@ -21,10 +21,10 @@ namespace Core
                 string text = string.Format("@{0} {1}", player, message);
                 SendKeys.SendWait("{DELETE}");
                 SendKeys.SendWait("{ENTER}");
-                TypeString(text);
+                SendKeys.SendWait(text);
                 SendKeys.SendWait("{ENTER}");
-                BlockInput(false);
             }
+            BlockInput(false);
         }
 
         public void InvitePlayerToParty(string player)
@@ -35,10 +35,10 @@ namespace Core
             {
                 SendKeys.SendWait("{DELETE}");
                 SendKeys.SendWait("{ENTER}");
-                TypeString("/invite " + player);
-                SendKeys.SendWait("{ENTER}");
-                BlockInput(false);
+                SendKeys.SendWait("/invite " + player);
+                SendKeys.SendWait("{ENTER}");                
             }
+            BlockInput(false);
         }
 
         public void SendCommand(string text)
@@ -50,10 +50,10 @@ namespace Core
                 BlockInput(true);
                 SendKeys.SendWait("{DELETE}");
                 SendKeys.SendWait("{ENTER}");
-                TypeString(text);
+                SendKeys.SendWait(text);
                 SendKeys.SendWait("{ENTER}");
-                BlockInput(false);
             }
+            BlockInput(false);
         }
 
         private void SendWhisperReply(string reply)
@@ -65,10 +65,10 @@ namespace Core
                 BlockInput(true);
                 SendKeys.SendWait("{DELETE}");
                 SendKeys.SendWait("^{ENTER}");
-                TypeString(reply);
+                SendKeys.SendWait(reply);
                 SendKeys.SendWait("{ENTER}");
-                BlockInput(false);
             }
+            BlockInput(false);
         }
 
 
@@ -81,10 +81,10 @@ namespace Core
                 BlockInput(true);
                 SendKeys.SendWait("{DELETE}");
                 SendKeys.SendWait("{ENTER}");
-                TypeString("/kick " + player);
+                SendKeys.SendWait("/kick " + player);
                 SendKeys.SendWait("{ENTER}");
-                BlockInput(false);
             }
+            BlockInput(false);
         }
 
         public void SendTradeRequest(string player)
@@ -96,38 +96,15 @@ namespace Core
                 BlockInput(true);
                 SendKeys.SendWait("{DELETE}");
                 SendKeys.SendWait("{ENTER}");
-                TypeString("/tradewith " + player);
+                SendKeys.SendWait("/tradewith " + player);
                 SendKeys.SendWait("{ENTER}");
                 BlockInput(false);
             }
         }
-
-
-        private void TypeString(string text)
-        {
-            SendKeys.SendWait(text);
-
-            //foreach (char ch in text)
-            //{
-            //    SendKeys.SendWait(ch.ToString());
-            //}
-        }
-
+        
         [System.Runtime.InteropServices.DllImportAttribute("user32.dll", EntryPoint = "BlockInput")]
         [return: System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.Bool)]
         public static extern bool BlockInput([System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.Bool)] bool fBlockIt);
-
-        public static void BlockInput(TimeSpan span)
-        {
-            try
-            {
-                BlockInput(true);
-                Thread.Sleep(span);
-            }
-            finally
-            {
-                BlockInput(false);
-            }
-        }
+        
     }
 }
