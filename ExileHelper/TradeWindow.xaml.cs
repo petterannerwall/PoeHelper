@@ -90,8 +90,9 @@ namespace ExileHelper
             var cmd = (Button)sender;
             Message message = (Message)cmd.DataContext;
             _inputSender.InvitePlayerToParty(message.Player);
-            Player.PendingTrades.Remove(message);
+            //Player.PendingTrades.Remove(message);
             Player.AcceptedTrades.Add(message);
+            updateList();
         }
 
         private void inMapButton_Click(object sender, RoutedEventArgs e)
@@ -108,7 +109,6 @@ namespace ExileHelper
             _inputSender.SendWhisperTo(message.Player, _settings.SoldMessage + " " + message.Item);
             Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
             updateList();
-
         }
 
         private void tradesListBox_MouseDown(object sender, MouseButtonEventArgs e)
@@ -125,7 +125,7 @@ namespace ExileHelper
                 _pendingTrades.OrderBy(t => t.Time);
                 _acceptedTrades.OrderBy(t => t.Time);
                 pendingTradesListBox.ItemsSource = _pendingTrades;
-                acceptedTradesListBox.ItemsSource = _acceptedTrades;
+                //acceptedTradesListBox.ItemsSource = _acceptedTrades;
             });
         }
 
@@ -148,6 +148,7 @@ namespace ExileHelper
 
             _inputSender.KickPlayerFromParty(message.Player);
             Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
+            Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
             closeIfEmptyElseUpdate();
 
         }
@@ -171,7 +172,7 @@ namespace ExileHelper
         {
             if (_settings.FadeTradelist)
             {
-                this.Opacity = 0.1;
+                this.Opacity = 0.5;
             }
         }
 
@@ -179,6 +180,7 @@ namespace ExileHelper
         {
             var cmd = (Button)sender;
             Message message = (Message)cmd.DataContext;
+            Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
             Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
             closeIfEmptyElseUpdate();
         }
@@ -188,6 +190,7 @@ namespace ExileHelper
             var cmd = (Button)sender;
             Message message = (Message)cmd.DataContext;
             Player.AcceptedTrades.RemoveAll(x => x.ID == message.ID);
+            Player.PendingTrades.RemoveAll(x => x.ID == message.ID);
             closeIfEmptyElseUpdate();
         }
 

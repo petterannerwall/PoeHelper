@@ -1,0 +1,41 @@
+﻿<Window x:Class="ExileHelper.PoETradeWindowOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExileHelper"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResizeWithGrip"
+        WindowStyle="None"
+        Title="PoETradeWindowOverlay"
+        BorderBrush="Red"
+        BorderThickness="1"
+        Height="250"
+        Width="600">
+    <Grid x:Name="inventoryGrid" ShowGridLines="True" MouseDown="Grid_MouseDown">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="Col_1"/>
+            <ColumnDefinition x:Name="Col_2"/>
+            <ColumnDefinition x:Name="Col_3"/>
+            <ColumnDefinition x:Name="Col_4"/>
+            <ColumnDefinition x:Name="Col_5"/>
+            <ColumnDefinition x:Name="Col_6"/>
+            <ColumnDefinition x:Name="Col_7"/>
+            <ColumnDefinition x:Name="Col_8"/>
+            <ColumnDefinition x:Name="Col_9"/>
+            <ColumnDefinition x:Name="Col_10"/>
+            <ColumnDefinition x:Name="Col_11"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="Row_1"/>
+            <RowDefinition x:Name="Row_2"/>
+            <RowDefinition x:Name="Row_3"/>
+            <RowDefinition x:Name="Row_4"/>
+            <RowDefinition x:Name="Row_5"/>
+        </Grid.RowDefinitions>
+        <Rectangle x:Name="Cell_1_1" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Grid.RowSpan="1" Stroke="Black" VerticalAlignment="Stretch"/>
+    </Grid>
+</Window>

@@ -13,7 +13,7 @@
         MinWidth="300"        
         Title="TradeWindow" Width="300" 
         Background="#FF323232" 
-        Opacity="0.2"
+        Opacity="0.5"
         Foreground="{x:Null}" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave">
 
     <Window.Resources>
@@ -22,9 +22,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".50*"/>
-            <RowDefinition Height=".50*"/>
+            <!--<RowDefinition Height=".50*"/>-->
         </Grid.RowDefinitions>
-        <ListBox x:Name="pendingTradesListBox" Grid.Row="0" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Margin="10,38,10,10.2" BorderBrush="{x:Null}" BorderThickness="0" MouseDown="tradesListBox_MouseDown" MouseUp="tradeListBox_MouseUp">
+        <ListBox x:Name="pendingTradesListBox" Grid.Row="0" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Margin="10,38,10,10" BorderBrush="{x:Null}" BorderThickness="0" MouseDown="tradesListBox_MouseDown" MouseUp="tradeListBox_MouseUp">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Style.Triggers>
@@ -69,15 +69,17 @@
                         <Label Grid.Row="0" Content="{Binding Price.Text}" HorizontalAlignment="Right"  Foreground="White" Margin="0,0,10,50" Grid.RowSpan="2" RenderTransformOrigin="-0.763,0.618" Width="117" HorizontalContentAlignment="Right" />
                         <Label Grid.Row="0" Content="{Binding Player, Converter={StaticResource UcFirstConverter}}" HorizontalAlignment="Left" Foreground="White" Margin="10,17,0,31" Grid.RowSpan="2" Width="271" FontSize="10.667"/>
                         <Label Grid.Row="0" Content="{Binding Location}" HorizontalAlignment="Right" Foreground="White" Margin="0,0,10,31" Grid.RowSpan="2" Width="215" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" FontSize="10.667" Height="29"/>
-                        <Button x:Name="inviteButton" Grid.Row="1" Content="Invite" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" Margin="10,19.4,0,1" Height="30" Click="inviteButton_Click" RenderTransformOrigin="0.888,0.553" />
-                        <Button x:Name="inMapButton"   Grid.Row="1" Content="In Map" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" Margin="74,19.4,0,1" Height="30" Click="inMapButton_Click" RenderTransformOrigin="0.14,0.533" />
-                        <Button x:Name="soldButton"  Grid.Row="1" Content="Sold" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" Margin="137,19.4,0,1" Height="30" Click="soldButton_Click" RenderTransformOrigin="0.25,0.607"  />
-                        <Button x:Name="closePendingButton" Grid.Row="1" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" Margin="201,19.4,0,1" Height="30" Click="closePendingButton_Click" RenderTransformOrigin="0.48,0.293" />
+                        <Button x:Name="inviteButton" Content="Invite" HorizontalAlignment="Left" VerticalAlignment="Center" Width="35" Margin="11,19.4,0,1" Height="30" Click="inviteButton_Click" RenderTransformOrigin="0.888,0.553" Grid.Row="1" />
+                        <Button x:Name="inMapButton" Content="In Map" HorizontalAlignment="Left" VerticalAlignment="Center" Width="45" Margin="91,19.4,0,1" Height="30" Click="inMapButton_Click" RenderTransformOrigin="0.14,0.533" Grid.Row="1" />
+                        <Button x:Name="soldButton"  Grid.Row="1" Content="Sold" HorizontalAlignment="Left" VerticalAlignment="Center" Width="35" Margin="181,19.4,0,1" Height="30" Click="soldButton_Click" RenderTransformOrigin="0.25,0.607"  />
+                        <Button x:Name="closePendingButton" Grid.Row="1" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Center" Width="38" Margin="221,19.4,0,1" Height="30" Click="closePendingButton_Click" RenderTransformOrigin="0.48,0.293" />
+                        <Button x:Name="tradeButton" Content="Trade" HorizontalAlignment="Left" VerticalAlignment="Center" Width="35" Margin="51,19.4,0,1" Height="30" Click="TradeButton_OnClick" Grid.Row="1" />
+                        <Button x:Name="thankButton"  Grid.Row="1" Content="Thank" HorizontalAlignment="Left" VerticalAlignment="Center" Width="35" Margin="141,19.4,0,1" Height="30" Click="ThankButton_OnClick" RenderTransformOrigin="-0.284,-0.22"  />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="acceptedTradesListBox" Grid.Row="1" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Margin="10,9.8,10,10.2" BorderBrush="{x:Null}" BorderThickness="0" MouseDown="tradesListBox_MouseDown" MouseUp="tradeListBox_MouseUp">
+        <!--<ListBox x:Name="acceptedTradesListBox" Grid.Row="1" Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Margin="10,9.8,10,10.2" BorderBrush="{x:Null}" BorderThickness="0" MouseDown="tradesListBox_MouseDown" MouseUp="tradeListBox_MouseUp">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Style.Triggers>
@@ -127,7 +129,7 @@
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
         <Label x:Name="TitleLabel" Content="Trades" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="33" Background="Transparent" Foreground="#FFDADADA" FontWeight="SemiBold" FontSize="16" MouseDown="tradesListBox_MouseDown" MouseUp="tradeListBox_MouseUp"/>
         <Label x:Name="closeLabel" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-3,-3,0" RenderTransformOrigin="5.954,1.118" MouseDown="closeWindowButton_Click" Height="23" Width="24" HorizontalContentAlignment="Center"/>
 

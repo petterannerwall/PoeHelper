@@ -31,8 +31,8 @@ namespace ExileHelper
 
         public MainWindow()
         {
-            
-            
+
+
             MessageReader.NewMessage += NewMessageDetected;
             InitializeComponent();
 
@@ -47,15 +47,15 @@ namespace ExileHelper
                 delegate (object sender, EventArgs args)
                 {
                     this.Show();
-                    this.WindowState = System.Windows.WindowState.Normal;
+                    this.WindowState = WindowState.Normal;
                 };
 
         }
 
         protected override void OnStateChanged(EventArgs e)
         {
-            if (WindowState == System.Windows.WindowState.Minimized)
-                this.Hide();
+            if (WindowState == WindowState.Minimized)
+            this.Hide();
             base.OnStateChanged(e);
         }
 
@@ -65,7 +65,8 @@ namespace ExileHelper
             {
                 TradeWindowOpen = true;
 
-                Application.Current.Dispatcher.Invoke((Action)delegate {
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
                     TradeWindow tradeWindow = new TradeWindow();
                     tradeWindow.Show();
                 });
@@ -76,7 +77,7 @@ namespace ExileHelper
             }
 
         }
-        
+
         private void savePathButton_Click(object sender, RoutedEventArgs e)
         {
             if (File.Exists(pathTextBox.Text))
@@ -108,11 +109,14 @@ namespace ExileHelper
 
         private void demoButton_Click(object sender, RoutedEventArgs e)
         {
-            var InfoWindow = new InformationWindow(new Message("") { });
-            var TradeWindow = new TradeWindow();
+            //    var InfoWindow = new InformationWindow(new Message("") { });
+            //    var TradeWindow = new TradeWindow();
 
-            InfoWindow.Show();
-            TradeWindow.Show();
+            //    InfoWindow.Show();
+            //    TradeWindow.Show();
+
+            //var tradeoverlay = new findCurrencyWindow();
+            //tradeoverlay.Show();
         }
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)
@@ -126,7 +130,7 @@ namespace ExileHelper
             _hotkey = new HotkeyManager(this);
             _hotkey.RegisterHotKey();
         }
-        
+
 
         protected override void OnClosed(EventArgs e)
         {

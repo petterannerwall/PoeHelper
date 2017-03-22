@@ -14,7 +14,7 @@
         <TextBox x:Name="debugTextBox" HorizontalAlignment="Left" Height="23" Margin="10,64,0,0" VerticalAlignment="Top" Width="195" MaxLines="1" Text="2017/03/11 01:56:04 344817078 951 [INFO Client 6932] @From &lt;[CoCa]&gt; LBVzwerg: Hi, I would like to buy your Poorjoy's Asylum Temple Map listed for 10 chaos in Legacy (stash tab &quot;&lt;3&quot;; position: left 10, top 8)"/>
         <Button x:Name="debugButton" Content="Debug" HorizontalAlignment="Left" Margin="210,64,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="debugButton_Click"/>
         <Button x:Name="settingsButton" Content="Settings" HorizontalAlignment="Left" Height="23" Margin="10,105,0,0" VerticalAlignment="Top" Width="91" Click="settingsButton_Click"/>
-        <Button x:Name="demoButton" Content="Demo" HorizontalAlignment="Left" Height="23" Margin="106,105,0,0" VerticalAlignment="Top" Width="91" Click="demoButton_Click"/>
+        <Button x:Name="demoButton" Content="Currency" HorizontalAlignment="Left" Height="23" Margin="106,105,0,0" VerticalAlignment="Top" Width="91" Click="demoButton_Click"/>
 
     </Grid>
 </Window>
